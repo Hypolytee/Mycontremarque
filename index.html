@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Recherche Catalogue</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        input { padding: 0.5rem; width: 100%; max-width: 400px; }
+        .item { border: 1px solid #ccc; margin: 0.5rem 0; padding: 0.5rem; border-radius: 4px; }
+        .item h3 { margin: 0 0 0.2rem 0; }
+    </style>
+</head>
+<body>
+    <h1>Recherche dans le catalogue</h1>
+    <input id="search" type="text" placeholder="Rechercher un produit…" />
+    <div id="results"></div>
+
+    <script>
+        let items = [];
+        const resultsDiv = document.getElementById('results');
+        const searchInput = document.getElementById('search');
+
+        fetch('catalog.json')
+            .then(resp => resp.json())
+            .then(data => {
+                items = data;
+                render(items);
+            });
+
+        function render(list) {
+            resultsDiv.innerHTML = '';
+            if (list.length === 0) {
+                resultsDiv.textContent = 'Aucun résultat';
+                return;
+            }
+            list.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'item';
+                div.innerHTML = `<h3>${item.name}</h3><p>${item.description}</p><p><strong>${item.price.toFixed(2)}€</strong></p>`;
+                resultsDiv.appendChild(div);
+            });
+        }
+
+        searchInput.addEventListener('input', e => {
+            const q = e.target.value.toLowerCase();
+            const filtered = items.filter(it =>
+                it.name.toLowerCase().includes(q) ||
+                it.description.toLowerCase().includes(q)
+            );
+            render(filtered);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Tasse à café",
+    "description": "Tasse en céramique 20cl",
+    "price": 3.5
+  },
+  {
+    "id": 2,
+    "name": "Assiette plate",
+    "description": "Assiette blanche 25cm",
+    "price": 5.0
+  },
+  {
+    "id": 3,
+    "name": "Verre à vin",
+    "description": "Verre en cristal 35cl",
+    "price": 7.2
+  },
+  {
+    "id": 4,
+    "name": "Couteau de chef",
+    "description": "Couteau en acier inox",
+    "price": 25.0
+  }
+]
